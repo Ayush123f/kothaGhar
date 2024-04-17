@@ -1,0 +1,135 @@
+@import url('components/nav.css');
+@import url('components/roomInfoOverlay.css');
+
+
+*{ padding:0; margin:0; box-sizing: border-box;
+list-style: none;
+text-decoration: none;
+color: inherit;}
+
+html{
+	scroll-behavior: smooth;
+}
+
+
+.card-section{
+	display: grid;
+	grid-template-columns: repeat(4,1fr);
+	gap: 2rem;
+	box-shadow: 2px 3px 5px grey;
+	padding: 2rem;
+	text-align: center;
+}
+
+.card {
+	display: grid;
+	gap: 1rem;
+	padding: 0.75rem;
+	border-radius: 0.75rem;
+  }
+  .card > img {
+	aspect-ratio:  16 / 9;
+	object-fit: cover;
+	overflow: hidden;
+	border-radius: 0.75rem;
+  }
+
+  .card > .title {
+	text-align: left;
+  }
+  
+  .card >.price {
+	color: grey;
+	font-size: 1.5rem;
+	text-align: left;
+  }
+  
+  .card > button {
+  background-color: #13aa52;
+  border: 1px solid #13aa52;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  /* font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif; */
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  padding: 10px 25px;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.card > button:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+  .button-37 {
+    padding: 10px 30px;
+  }
+}
+  
+  
+  .card button:hover {
+	opacity: 0.7;
+  }
+
+#footer{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background: black;
+	color: white;
+	padding: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+.room {
+  background-color: #fff;
+  width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+

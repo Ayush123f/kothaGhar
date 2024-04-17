@@ -1,0 +1,101 @@
+#roomInfoOverlay {
+  display: none;
+}
+#roomInfoOverlay.open {
+  display: block;
+  min-width: 100vh;
+  min-height: 100vh;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgb(255, 255, 255,0.7);
+  backdrop-filter: blur(16px);
+  --webkit-backdrop-dilter: blur(16px);
+  padding: 8rem;
+  overflow-y: auto;
+}
+
+#roomInfoOverlay > .roomInfoWrapper {
+  width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+}
+
+.roomInfoWrapper > .room-images  > img {
+  height: 100%;
+  width: 100%;
+	object-fit: cover;
+	overflow: hidden;
+	border-radius: 0.75rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 20px 0px;
+  }
+
+.roomInfoWrapper > .room-images {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(3,1fr);
+  padding-bottom: 2rem;
+}
+
+.info {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background-color: aliceblue;
+	border-radius: 0.75rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 20px 0px;
+  font-size: 0.9rem;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.info > .title {
+  font-size: 2rem;
+}
+
+.info > .location {
+  font-size: 1.1rem;
+}
+
+.info > .price {
+  font-size: 1.2rem;
+}
+
+.info > button {
+  background-color: #13aa52;
+  border: 1px solid #13aa52;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  padding: 10px 25px;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.info > button:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+#roomInfoOverlay-close-btn {
+  padding: 0.75rem 1rem;
+  border: none;
+  background-color: black;
+  color: white;
+  border-radius: 0.75rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 20px 0px;
+  position: fixed;
+  top: 1rem;
+  right: 2rem;
+}
