@@ -9,9 +9,9 @@ require_once BASE_DIR . 'views/components/nav.php';
 $host = 'localhost';
 $user = 'root';
 $pass = '';
-$db   = 'room_rental';
+$conn   = 'room_rental';
 
-$conn = new mysqli($host, $user, $pass, $db);
+$conn = new mysqli($host, $user, $pass, $conn);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

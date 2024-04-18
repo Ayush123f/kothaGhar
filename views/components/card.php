@@ -3,10 +3,10 @@
 $host = 'localhost';
 $user = 'root';
 $pass = '';
-$db   = 'room_rental';
+$conn   = 'room_rental';
 
 // Connect to the database
-$conn = new mysqli($host, $user, $pass, $db);
+$conn = new mysqli($host, $user, $pass, $conn);
 
 // Check connection
 if ($conn->connect_error) {
