@@ -1,16 +1,23 @@
 <?php
+// login.php   
+
+session_start();
+
+// Check if the user is already logged in, redirect to adminIndex.php
+if (isset($_SESSION['user'])) {
+    header('location: adminIndex.php');
+    exit();
+}
+
 const BASE_DIR = __DIR__ . '/../../';
 
 require_once BASE_DIR . 'views/components/head.php';
 require_once BASE_DIR . 'views/components/nav.php';
-?>
-<?php
-// login.php
 
 // Form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  require_once BASE_DIR . "config/config_db.php";
-  require_once BASE_DIR . "config/functions.php";
+    require_once BASE_DIR . "config/config_db.php";
+    require_once BASE_DIR . "config/functions.php";
 
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -35,24 +42,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (password_verify($password, $hashedPassword)) {
             // Passwords match, login successful
-
-            $_SESSION['user'] =[
-              'id' => $user['user_id'],
-              'fullname'=> $user['full_name'],
-              'email'=> $user['email'],
-              'contact'=> $user['contact']
+            $_SESSION['user'] = [
+                'id' => $user['user_id'],
+                'fullname' => $user['full_name'],
+                'email' => $user['email'],
+                'contact' => $user['contact']
             ];
-            
-            header('location: index.php');
+            header('location: adminIndex.php'); // Redirect to adminIndex.php
             exit();
         } else {
             // Passwords don't match
-            alert('Incorrect email or password');
+            echo '<script>alert("Incorrect email or password");</script>';
         }
     } else {
         // User not found
-        alert('Incorrect email or password');
-
+        echo '<script>alert("Incorrect email or password");</script>';
     }
 
     $stmt->close(); // Close statement
@@ -62,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="login-page">
   <div class="form">
-  <form method="post" action="login.php">
+  <form method="post">
   <h1 id="title">Log In</h1>
     <input type="text" name="email" id="email" placeholder="E-mail" required title="Enter e-mail address">
     <input type="password" name="password" id="password" placeholder="Password" required title="Enter password" minlength="8" maxlength="16">

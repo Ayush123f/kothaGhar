@@ -5,7 +5,7 @@
     <thead>
       <tr>
         <th><span>Title</span></th>
-        <th><span>No. of rooms</span></th>
+        <th><span>No.of rooms</span></th>
         <th><span>Price</span></th>
         <th><span>Location</span></th>
         <th><span>Edit</span></th>

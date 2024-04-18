@@ -27,7 +27,7 @@
   <ul class="nav navbar-nav navbar-right">
       <?php 
       
-if(isset($_SESSION["email"]) && !empty($_SESSION['email'])){
+if(isset($_SESSION["user"]) && !empty($_SESSION['user'])){
 ?>
 <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> My Profile

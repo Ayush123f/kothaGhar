@@ -1,8 +1,3 @@
-<?php 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-?>
 <!DOCTYPE html>
 <html>
 
@@ -15,7 +10,7 @@ if (session_status() == PHP_SESSION_NONE) {
         'signup.php' => ['loginAndSignup.css'],
         'adminLogin.php'=> ['loginAndSignup.css'],
         'index.php' => ['style.css'],
-        'about.php'  => ['about.css'],
+        'aboutUs.php'  => ['aboutUs.css'],
         'adminIndex.php' =>['adminStyle.css'],
         'uploadForm.php' => ['loginAndSignup.css'],
         'Search.php'=> ['search.css'],
@@ -33,13 +28,13 @@ if (session_status() == PHP_SESSION_NONE) {
 
     if(array_key_exists($uri, $styles)){
         foreach ( $styles[$uri] as $style ) { ?>
-           <link rel="stylesheet" href="./../../css/<?=$style?>">
+           <link rel="stylesheet" href="./../css/<?=$style?>">
        <?php }   
 		}
 
     if(array_key_exists($uri, $scripts)){
         foreach ( $scripts[$uri] as $script ) { ?>
-            <script src="./../../js/<?= $script ?>" defer></script>
+            <script src="./../js/<?= $script ?>" defer></script>
 						<?php }
         }
 
@@ -48,3 +43,5 @@ if (session_status() == PHP_SESSION_NONE) {
 </head>
 
 <body>
+    <?php session_start() ?>
+
