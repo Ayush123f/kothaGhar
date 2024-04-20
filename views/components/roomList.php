@@ -1,6 +1,8 @@
+
+
 <div id="wrapper">
   <h1>Record of Rooms</h1>
-  
+  <a href="/kothaGhar/views/pages/uploadForm.php" class="btn btn-default navbar-btn">Add Room</a>
   <table id="keywords" cellspacing="0" cellpadding="0">
     <thead>
       <tr>
