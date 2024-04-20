@@ -23,6 +23,17 @@
     <li class="nav-item">
       <a class="nav-link" href="/kothaGhar/views/pages/about.php">About Us</a>
     </li>
+    <?php
+    if(isset($_SESSION["user"]) && !empty($_SESSION['user']) && boolval($_SESSION["user"]["is_admin"])){
+      ?>
+      <li class="nav-item">
+      <a class="nav-link" href="/kothaGhar/views/pages/roomList.php">Rooms</a>
+    </li>
+    <?php    
+    }
+   ?>
+
+    
    
   <ul class="nav navbar-nav navbar-right">
       <?php 
@@ -44,7 +55,8 @@ if(isset($_SESSION["user"]) && !empty($_SESSION['user'])){
   
 }
 
-else {?>
+else {
+  ?>
       <li><a href="/kothaGhar/views/pages/signup.php"><span class="glyphicon glyphicon-user"></span>Signup</a></li>
       <li><a href="/kothaGhar/views/pages/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     <?php } ?>

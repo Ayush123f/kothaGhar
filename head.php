@@ -14,7 +14,8 @@
         'adminIndex.php' =>['adminStyle.css'],
         'uploadForm.php' => ['loginAndSignup.css'],
         'Search.php'=> ['search.css'],
-        'roomDetails.php'=> ['style.css']
+        'roomDetails.php'=> ['style.css'],
+        'roomList.php' => ['adminStyle.css']
     ];
 
     $scripts = [
