@@ -25,7 +25,8 @@ if (session_status() == PHP_SESSION_NONE) {
     $scripts = [
         'login.php' => ['xyz.js'],
         'signup.php' => ['xyz.js'],
-        'index.php' => ['roomInfoOverlay.js']
+        'index.php' => ['roomInfoOverlay.js'],
+        'is_admin.php' =>['is_admin.js']
     ];
 
     $uri = parse_url($_SERVER["REQUEST_URI"])['path'];

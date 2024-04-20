@@ -46,9 +46,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'id' => $user['user_id'],
                 'fullname' => $user['full_name'],
                 'email' => $user['email'],
-                'contact' => $user['contact']
+                'contact' => $user['contact'],
+                'is_admin' => boolval($user['is_admin'])
             ];
-            header('location: adminIndex.php'); // Redirect to adminIndex.php
+
+            if (boolval($user['is_admin'])) {
+                header('location: adminIndex.php'); // Redirect to adminIndex.php
+
+            }
+            else {
+                header('location:/kothaGhar/index.php'); //
+            }
+            
+          
             exit();
         } else {
             // Passwords don't match
