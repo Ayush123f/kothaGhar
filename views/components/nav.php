@@ -32,7 +32,13 @@
     <!-- Links -->
     <ul class="nav navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="/kothaGhar/index.php">Home</a>
+        <?php
+          if (isset($_SESSION["user"]) && !empty($_SESSION['user']) && boolval($_SESSION["user"]["is_admin"])) {
+            echo '<a class="nav-link" href="/kothaGhar/views/pages/adminIndex.php">Home</a>';
+          } else {
+            echo '<a class="nav-link" href="/kothaGhar/index.php">Home</a>';
+          }
+        ?>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/kothaGhar/views/pages/about.php">About Us</a>
