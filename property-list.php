@@ -2,34 +2,35 @@
 include ("config/config_db.php");
 ?>
 <style>
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 40px;
+    justify-content: space-between;
+  }
+
   .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 100%;
-    min-width: 100%;
-    margin: auto;
-    text-align: center;
-    font-family: arial;
-    display: inline;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    overflow: hidden;
   }
 
-  .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    opacity: 0.8;
-  }
-
-  .container {
-    padding: 2px 16px;
-  }
-
-  .btn {
+  .card img {
     width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
   }
 
-  .image {
-    min-width: 100%;
-    min-height: 200px;
-    max-width: 100%;
-    max-height: 200px;
+  .card h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .card p {
+    margin-bottom: 5px;
   }
 </style>
 
@@ -50,23 +51,25 @@ $query = "SELECT * FROM add_room";
 $result = $conn->query($query);
 
 // Check if the query returned any results
+echo "<div class='card-container'>";
 if ($result->num_rows > 0) {
   // Loop through each row and display room details
   while ($room_details = $result->fetch_assoc()) {
-    echo '<div class="card">';
-    echo '<img class="image" src="' . $room_details['ImagePath'] . '" alt="Room Image">';
-    echo '<div class="container">';
-    echo '<h4><b>' . $room_details['Title'] . '</b></h4>';
-    echo '<p>Number of Rooms: ' . $room_details['NumberOfRooms'] . '</p>';
-    echo '<p>Price: $' . $room_details['Price'] . '</p>';
-    echo '<p>Location: ' . $room_details['Location'] . '</p>';
-    echo '</div>';
-    echo '</div>';
+    echo <<<HTML
+      <div class="card">
+          <img class="image" src="{$room_details['ImagePath']}" alt="Room Image">
+          <h4><b>{$room_details['Title']}</b></h4>
+          <p>Number of Rooms: {$room_details['NumberOfRooms']}</p>
+          <p>Price: {$room_details['Price']}</p>
+          <p>Location: {$room_details['Location']}</p>
+      </div>
+    HTML;
   }
 } else {
   // If the query didn't return any results, display an error message
   echo 'Error: No rooms found.';
 }
+echo "</div>";
 
 // Close the database connection
 $conn->close();
