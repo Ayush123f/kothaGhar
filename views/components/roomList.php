@@ -32,7 +32,7 @@ $result = $conn->query($query);
                   <td> {$room_details['Location']} </td>
                 
                   <!-- Edit button -->
-                  <td><a id="location" href="uploadForm.php?id={$room_details['RoomID']}">Edit</a></td>
+                  <td><a id="location" href="editRoom.php?id={$room_details['RoomID']}">Edit</a></td>
                   <td><a id="location" href="delete.php?id={$room_details['RoomID']}">Delete</a></td>
                 </tr>
           HTML;

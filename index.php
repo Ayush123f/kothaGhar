@@ -12,7 +12,7 @@ body, html {
 
 .bg {
   /* The image used */
-  background-image: url("images/carousel.png");
+  background-image: url("image/house.jpg");
 
   /* Full height */
   height: 60%; 
