@@ -51,20 +51,13 @@ $result = $conn->query($query);
   </table>
 </div>
 
+<?php
     
     // Close the database connection
     $conn->close();
     ?>
 
-    <tr>
-     <td class="lalign">Room at Bhaisepati</td>
-      <td>5</td>
-      <td>25000</td>
-      <td><a id="location" href="https://maps.app.goo.gl/wMZMSak6RP3z86UM6">patan</a></td>
-      <td><a id="location" href="uploadForm.php?id=1">Edit</a></td> <!-- Modify this link -->
-      <td><a id="location" href="delete.php?id=1">Delete</a></td>
-</tr>
-<!-- Repeat this structure for each room -->
+  
 
     </tbody>
 
