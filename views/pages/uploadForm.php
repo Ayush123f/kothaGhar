@@ -7,6 +7,22 @@ require_once BASE_DIR . 'views/components/nav.php';
 require_once BASE_DIR . "config/config_db.php";
 require_once BASE_DIR . "config/functions.php";
 
+// Check if room ID is provided in the query parameter
+if(isset($_GET['id'])) {
+    $roomId = $_GET['id'];
+    
+    // Fetch room information from the database based on the room ID
+    // Assuming you have fetched room information and stored it in $roomInfo variable
+    
+    // Pre-fill form fields with room information
+    echo "<script>";
+    echo "document.getElementById('title').value = '{$roomInfo['title']}';";
+    echo "document.getElementById('numOfRooms').value = '{$roomInfo['numOfRooms']}';";
+    echo "document.getElementById('price').value = '{$roomInfo['price']}';";
+    echo "document.getElementById('location').value = '{$roomInfo['location']}';";
+    echo "</script>";
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST["title"];
     $numOfRooms = $_POST["numOfRoom"];

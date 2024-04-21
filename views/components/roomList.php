@@ -1,4 +1,9 @@
-
+<?php
+include("../../config/config_db.php");
+    
+$query = "SELECT * FROM add_room";
+$result = $conn->query($query);
+?>
 
 <div id="wrapper">
   <h1>Record of Rooms</h1>
@@ -15,60 +20,56 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="lalign">Room at Bhaisepati</td>
-        <td>5</td>
-        <td>25000</td>
-        <td><a id="location" href ="https://maps.app.goo.gl/wMZMSak6RP3z86UM6">patan</a></td>
-        <td><a id="location" href =
-               "#">Edit </a></td>
-              <td><a id="location" href =
-               "#">Delete </a></td>
-      </tr>
-      <tr>
-      <td class="lalign">Room at Banasthali</td>
-        <td>5</td>
-        <td>35000</td>
-        <td><a id="location" href ="https://maps.app.goo.gl/wMZMSak6RP3z86UM6">balaju </a></td>
-        <td><a id="location" href =
-               "#">Edit </a></td>
-              <td><a id="location" href =
-               "#">Delete </a></td>
-</tr>
-      <tr>
-      <tr>
-      <td class="lalign">Room at Nayabazar</td>
-        <td>3</td>
-        <td>22000</td>
-        <td><a id="location" href ="https://maps.app.goo.gl/wMZMSak6RP3z86UM6">ktm </a></td>
-        <td><a id="location" href =
-               "#">Edit </a></td>
-              <td><a id="location" href =
-               "#">Delete </a></td>
-</tr>
-      <tr>
-      <td class="lalign">Room at Kalanki</td>
-        <td>2</td>
-        <td>35000</td>
-        <td><a id="location" href ="https://maps.app.goo.gl/wMZMSak6RP3z86UM6">Ktm</a></td>
-        <td><a id="location" href =
-               "#">Edit </a></td>
-              <td><a id="location" href =
-               "#">Delete </a></td>
-
-</tr>
-<tr>
-      <td class="lalign">Room at Kupandol</td>
-        <td>2</td>
-        <td>35000</td>
-        <td><a id="location" href ="https://maps.app.goo.gl/wMZMSak6RP3z86UM6">KTM </a></td>
-        <td><a id="location" href =
-               "#">Edit </a></td>
-              <td><a id="location" href =
-               "#">Delete </a></td>
-
-</tr>
-
+      <?php
+      if ($result->num_rows > 0) {
+          // Loop through each row and display room details
+          while ($room_details = $result->fetch_assoc()) { 
+           echo <<<HTML
+                <tr>
+                  <td> {$room_details['Title']} </td>
+                  <td> {$room_details['NumberOfRooms']} </td>
+                  <td> {$room_details['Price']} </td>
+                  <td> {$room_details['Location']} </td>
+                
+                  <!-- Edit button -->
+                  <td><a id="location" href="uploadForm.php?id={$room_details['RoomID']}">Edit</a></td>
+                  <td><a id="location" href="delete.php?id={$room_details['RoomID']}">Delete</a></td>
+                </tr>
+          HTML;
+         
+     
+          }
+      } else {
+          // If the query didn't return any results, display an error message
+          echo 'Error: No rooms found.';
+      }
+    
+      // Close the database connection
+      $conn->close();
+      ?>
     </tbody>
   </table>
+</div>
+
+    
+    // Close the database connection
+    $conn->close();
+    ?>
+
+    <tr>
+     <td class="lalign">Room at Bhaisepati</td>
+      <td>5</td>
+      <td>25000</td>
+      <td><a id="location" href="https://maps.app.goo.gl/wMZMSak6RP3z86UM6">patan</a></td>
+      <td><a id="location" href="uploadForm.php?id=1">Edit</a></td> <!-- Modify this link -->
+      <td><a id="location" href="delete.php?id=1">Delete</a></td>
+</tr>
+<!-- Repeat this structure for each room -->
+
+    </tbody>
+
+
+  </table>
  </div> 
+
+ 

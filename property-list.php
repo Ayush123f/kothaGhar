@@ -1,6 +1,3 @@
-<?php 
-include("config/config_db.php");
- ?>
 
 <!DOCTYPE html>
 <html>
@@ -42,7 +39,6 @@ include("config/config_db.php");
 <body>
 
 <?php
-include("config/config_db.php");
 
 // Check if the ID parameter is set in the URL
 //if (isset($_GET['id'])) {
