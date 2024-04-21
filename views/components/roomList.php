@@ -36,8 +36,6 @@ $result = $conn->query($query);
                   <td><a id="location" href="delete.php?id={$room_details['RoomID']}">Delete</a></td>
                 </tr>
           HTML;
-         
-     
           }
       } else {
           // If the query didn't return any results, display an error message
@@ -51,17 +49,7 @@ $result = $conn->query($query);
   </table>
 </div>
 
-<?php
-    
-    // Close the database connection
-    $conn->close();
-    ?>
-
-  
-
     </tbody>
-
-
   </table>
  </div> 
 
