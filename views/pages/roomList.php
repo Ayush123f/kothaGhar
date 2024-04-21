@@ -14,4 +14,3 @@ require_once BASE_DIR . 'views/components/nav.php';
 require_once BASE_DIR . 'views/components/roomList.php';
 require_once BASE_DIR . 'views/components/footer.php';
 ?>
-
