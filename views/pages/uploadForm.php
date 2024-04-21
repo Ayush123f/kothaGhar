@@ -1,6 +1,8 @@
 <?php
 
 const BASE_DIR = __DIR__ . '/../../';
+const MEDIA_DIR = BASE_DIR . '/media/';
+const MEDIA_URL = '/kothaGhar/media/';
 
 require_once BASE_DIR . 'views/components/head.php';
 require_once BASE_DIR . 'views/components/nav.php';
@@ -15,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $imageFiles = $_FILES["uploadImage"];
 
     // Validate image files size and move them to a directory
-    $uploadDirectory = './uploadImg/';
+    $uploadDirectory = MEDIA_DIR . '/uploadImg/';
     if (!is_dir($uploadDirectory)) {
         mkdir($uploadDirectory, 0755, true); // Create the directory if it doesn't exist
     }
@@ -25,8 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $file_extension = pathinfo($imageFiles["name"][$key], PATHINFO_EXTENSION);
         $file_name = uniqid() . '.' . $file_extension;
         $file_path = $uploadDirectory . $file_name;
+        $file_url = MEDIA_URL . 'uploadImg/' . $file_name;
         if (move_uploaded_file($tmp_name, $file_path)) {
-            $uploadedFilePaths[] = $file_path;
+            $uploadedFilePaths[] = $file_url;
         } else {
             echo "<script>alert('Error uploading file: $file_name');</script>";
         }
