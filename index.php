@@ -50,8 +50,10 @@ body, html {
 <div class="bg"></div><br>
 <div class="container active-cyan-4 mb-4 inline">
 	<form method="POST" action="search-property.php">
-  <input class="form-control" type="text" placeholder="Enter location to search house." name="search_property" aria-label="Search">
-  </form>
+  <input class="form-control" type="text" placeholder="Enter location to search room." name="search_property" aria-label="Search">
+  <button type="submit" class="search-button"><img src="image/search.svg" alt="Logo" class="search-logo"></button>  
+</form>
+
 </div>
 <br><br>
 <?php 
@@ -60,3 +62,6 @@ include("property-list.php");
 
  ?>
  <br><br>
+
+
+ 

@@ -64,7 +64,7 @@
           <ul class="dropdown-menu">
             <li><a href="profile.php">Profile</a></li>
             <li><a href="booked-property.php">Booked Property</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="/KothaGhar/views/pages/logout.php">Logout</a></li>
           </ul>
         </li>
       <?php
