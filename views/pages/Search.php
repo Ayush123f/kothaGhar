@@ -19,35 +19,32 @@
 </div>
 
 <?php
-// Include necessary files and establish database connection
 include("config/config.php");
 session_start();
 
-// Check if the search query is set
 if(isset($_POST['search_property'])) {
-    // Sanitize the input
-    $q_string = mysqli_real_escape_string($db, $_POST['search_property']);
+    $search_location = mysqli_real_escape_string($db, $_POST['search_property']);
 
-    // Perform the database query
-    $sql = "SELECT * FROM add_room WHERE CONCAT(zone, district, province, city, tole, property_type, country) LIKE '%$q_string%'";
+    // Perform the database query to search for the entered location
+    $sql = "SELECT * FROM add_room WHERE concat(title,NumberOfRooms,Price,Location,ImagePath) LIKE '%$search_location%'";
     $query = mysqli_query($db, $sql);
 
-    // Display the search results
     if(mysqli_num_rows($query) > 0) {
         echo '<div class="container">';
         echo '<h1>Searched Properties</h1>';
-        while($rows = mysqli_fetch_assoc($query)) {
-            // Display each search result
-            // You can use the same HTML structure as in your original code snippet
-            // Just make sure to adjust the paths and links accordingly
+        while($row = mysqli_fetch_assoc($query)) {
+            // Display search results
+            // Here you can echo out the HTML structure to display each search result
+            echo "<p>Location: " . $row['Location'] . "</p>";
+            // You can add more details if needed
         }
         echo '</div>';
     } else {
-        echo "<div class='container'><h3>No properties found...</h3></div>";
+        echo "<div class='container'><h3>No properties found in the entered location...</h3></div>";
     }
 } else {
     // Redirect user to homepage if search query is not set
-    header("Location: /kothaGhar/index.php");
+    header("Location:/kothaGhar/index.php");
     exit();
 }
 ?>

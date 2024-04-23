@@ -42,28 +42,23 @@ if(isset($_GET['id'])) {
     echo 'Room ID not provided.';
 }
 
-
-
-
-
-
-// if(isset($_POST['book_room'])) {
-//     if(isset($_SESSION['user'])) {
-//         $user_id = $_SESSION['user']; 
-//         $room_id = $roomId; 
-//         $id=$user_id['id'];
-//         $sql = "INSERT INTO booked_rooms (user_id, room_id) VALUES ('$id', '$room_id')";
-//         if(mysqli_query($conn, $sql)) {
-//             echo '<script type ="text/JavaScript">';  
-//             echo 'alert("Booked Sucessfully")';  
-//             echo '</script>';  
-//         } else {
-//             echo "Error: " . mysqli_error($conn);
-//         }
-//     } else {
-//         echo "You need to login to book a room."; // Handle this case appropriately
-//     }
-// }
+if(isset($_POST['book_room'])) {
+    if(isset($_SESSION['user'])) {
+        $user_id = $_SESSION['user']; 
+        $room_id = $roomId; 
+        $id = $user_id['id'];
+        $sql = "INSERT INTO booked_rooms (user_id, room_id) VALUES ('$id', '$room_id')";
+        if(mysqli_query($conn, $sql)) {
+            echo '<script type ="text/JavaScript">';  
+            echo 'alert("Booked Sucessfully")';  
+            echo '</script>';  
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+    } else {
+        echo "You need to login to book a room."; 
+    }
+}
 
 $conn->close();
 
