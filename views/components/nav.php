@@ -49,6 +49,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/kothaGhar/views/pages/roomList.php">Rooms</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/kothaGhar/views/pages/bookings_list.php">Bookings</a>
+        </li>
         <?php    
       }
      ?>

@@ -22,8 +22,8 @@ if (session_status() == PHP_SESSION_NONE) {
         'roomDetails.php'=> ['style.css'],
         'roomList.php' => ['adminStyle.css'],
         'editRoom.php' => ['loginAndSignup.css'],
-        'updateRoom.php'=> ['loginAndSignup.css']
-
+        'updateRoom.php'=> ['loginAndSignup.css'],
+        'bookings_list.php'=> ['adminStyle.css']
     ];
 
     $scripts = [
