@@ -48,6 +48,14 @@ include ("config/config_db.php");
 include ("config/config_db.php");
 
 $query = "SELECT * FROM add_room";
+
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+  if (isset($_GET['search']) && !empty($_GET['search'])) {
+    $search = $conn->real_escape_string($_GET['search']);
+    $query = "SELECT * FROM add_room WHERE CONCAT(Title, Location) LIKE '%$search%'";
+  }
+}
+
 $result = $conn->query($query);
 
 // Check if the query returned any results
