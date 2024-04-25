@@ -53,6 +53,12 @@
           <a class="nav-link" href="/kothaGhar/views/pages/bookings_list.php">Bookings</a>
         </li>
         <?php    
+      } else {
+        ?>
+        <li class="nav-item">
+          <a class="nav-link" href="/kothaGhar/views/pages/mybookings.php">My Bookings</a>
+        </li>
+        <?php
       }
      ?>
     </ul>

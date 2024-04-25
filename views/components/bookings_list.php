@@ -22,6 +22,7 @@ $result = $conn->query($query);
         <th><span>User name</span></th>
         <th><span>Email</span></th>
         <th><span>Room Title</span></th>
+        <th><span>Cancellation Status</span></th>
         <th><span>Verification Status</span></th>
       </tr>
     </thead>
@@ -35,6 +36,7 @@ $result = $conn->query($query);
           echo '<td>' . $room_details['full_name'] . '</td>';
           echo '<td>' . $room_details['email'] . '</td>';
           echo '<td>' . $room_details['Title'] . '</td>';
+          echo '<td>' . ($room_details['is_cancelled'] == 1 ? 'Yes' : 'No') . '</td>';
           echo '<td>';
           echo '<label class="switch">';
           echo '<input type="checkbox" class="verification-checkbox" data-room-id="' . $room_details['room_id'] . '" ' . ($room_details['is_verified'] == 1 ? 'checked' : '') . '>';

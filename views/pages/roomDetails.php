@@ -1,39 +1,37 @@
 <?php
-
-
 const BASE_DIR = __DIR__ . '/../../';
 
 require_once BASE_DIR . 'views/components/head.php';
 require_once BASE_DIR . 'views/components/nav.php';
 
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$conn   = 'room_rental';
-
-$conn = new mysqli($host, $user, $pass, $conn);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include("../../config/config_db.php");
 
 if(isset($_GET['id'])) {
     $roomId = $_GET['id'];
-    
-    $sql = "SELECT * FROM add_room WHERE RoomID = $roomId";
+
+    $sql = "SELECT * FROM add_room ar LEFT JOIN booked_rooms br ON ar.RoomID = br.room_id WHERE RoomID = $roomId";
     $result = $conn->query($sql);
-    // $user_id = $_SESSION['user'];
 
     if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) { ?>
+        while ($row = $result->fetch_assoc()) { 
+            ?>
             <h2 id="title"><?php echo $row['Title'] ?> </h2>
             <p id="location">Location: <?php echo $row['Location'] ?></p>
             <p id="no-of-rooms">Number of rooms: <?php echo $row['NumberOfRooms'] ?></p>
             <p id="price">Price: Rs.<?php echo $row['Price'] ?></p>
-            <form id="bookingForm" method="post" action="roomDetails.php?id=<?php echo $roomId ?>">
-                <button type="submit" name="book_room">BOOK</button>
-            </form>
-            <?php echo '<img width="500px" src="' . $row['ImagePath'] . '" alt="' . $row['Title'] . '" />'; 
+            <?php
+            // Check if the room is cancelled or not booked
+            if ($row['is_cancelled'] == true || $row['id'] == null) {
+                // Display the book button only if the room is cancelled or not booked
+                echo '<form id="bookingForm" method="post" action="roomDetails.php?id=' . $roomId . '">';
+                echo '<button type="submit" name="book_room">BOOK</button>';
+                echo '</form>';
+            } else {
+                echo 'Room is not available.';
+            }
+            ?>
+            <img width="500px" src="<?php echo $row['ImagePath'] ?>" alt="<?php echo $row['Title'] ?>" />
+            <?php
         }
     } else {
         echo 'Room not found.';
@@ -49,8 +47,8 @@ if(isset($_POST['book_room'])) {
         $id = $user_id['id'];
         $sql = "INSERT INTO booked_rooms (user_id, room_id) VALUES ('$id', '$room_id')";
         if(mysqli_query($conn, $sql)) {
-            echo '<script type ="text/JavaScript">';  
-            echo 'alert("Booked Sucessfully")';  
+            echo '<script type="text/JavaScript">';  
+            echo 'alert("Booked Successfully")';  
             echo '</script>';  
         } else {
             echo "Error: " . mysqli_error($conn);
