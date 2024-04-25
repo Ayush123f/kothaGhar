@@ -50,15 +50,35 @@ include ("views/components/nav.php");
     border: 1px solid #4dd0e1;
     box-shadow: 0 0 0 1px #4dd0e1;
   }
+
+  .search-container-wrapper {
+    text-align: center;
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-input {
+    width: 75%;
+    padding: 5px;
+  }
 </style>
 
 <div class="bg"></div><br>
-<div class="container active-cyan-4 mb-4 inline">
+<div class="search-container-wrapper">
   <form method="GET">
-    <input class="form-control" type="text" placeholder="Title, Location to search room." name="search"
-      aria-label="Search">
-    <button type="submit" class="search-button"><img src="image/search.svg" alt="Logo" class="search-logo"></button>
+    <div class="search-container active-cyan-4 mb-4 inline">
+      <input class="search-input" type="text" placeholder="Title, Location to search room." name="search"
+        aria-label="Search">
+      <button type="submit" class="search-button">
+        <img src="image/search.svg" height="25px" width="25px" alt="Logo" class="search-logo">
+      </button>
+    </div>
   </form>
+</div>
 
 </div>
 <br><br>
