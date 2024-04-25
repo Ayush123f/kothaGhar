@@ -124,12 +124,55 @@ strong {
   font-weight: bold;
 }
 
+.room-details {
+  margin-bottom: 20px;
+}
 
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
 
+.location, .no-of-rooms, .price {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
 
+.price {
+  color: #FF5733;
+}
 
+.booking-form {
+  margin-top: 20px;
+}
 
+.book-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
+.book-button:hover {
+  background-color: #45a049;
+}
 
+.error {
+  color: red;
+}
 
+.room-image img {
+  width: 50%;
+  max-width: 500px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
 
+.room-details-container {
+  display: flex;
+  justify-content: space-around;
+}
