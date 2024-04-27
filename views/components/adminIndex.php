@@ -5,7 +5,7 @@ include ("../../config/config_db.php");
 // Function to retrieve total rooms booked
 function getTotalRoomsBooked($conn)
 {
-    $query = "SELECT COUNT(*) AS total FROM booked_rooms";
+    $query = "SELECT COUNT(*) AS total FROM booked_rooms WHERE is_approved = '1'";
     $result = $conn->query($query);
     $row = $result->fetch_assoc();
     return $row['total'];
@@ -32,7 +32,10 @@ function getTotalPendingBookings($conn)
 // Function to retrieve total rooms available
 function getTotalRoomsAvailable($conn)
 {
-    $query = "SELECT COUNT(*) AS total FROM add_room";
+    $query = "SELECT COUNT(DISTINCT ar.RoomID) AS total
+    FROM add_room ar
+    LEFT JOIN booked_rooms br ON ar.roomID = br.room_id 
+    WHERE br.room_id IS NULL OR br.is_cancelled = '1' OR br.is_rejected = '1'";
     $result = $conn->query($query);
     $row = $result->fetch_assoc();
     return $row['total'];
