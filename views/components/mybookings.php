@@ -4,7 +4,11 @@ include ("../../config/config_db.php");
 $user_id = $_SESSION['user']['id'];
 
 // Prepare the SQL query using a prepared statement
-$query = "SELECT * FROM booked_rooms br INNER JOIN add_room ar ON br.room_id = ar.roomID WHERE br.user_id = ?";
+$query = "SELECT * FROM booked_rooms br 
+INNER JOIN add_room ar 
+ON br.room_id = ar.roomID 
+WHERE br.user_id = ?
+ORDER BY br.id DESC";
 $stmt = $conn->prepare($query);
 
 // Bind the user ID parameter
@@ -27,7 +31,7 @@ $result = $stmt->get_result();
         <th><span>Room Title</span></th>
         <th><span>Location</span></th>
         <th><span>Price</span></th>
-        <th><span>Verification Status</span></th>
+        <th><span>Room Status</span></th>
         <th><span>Action</span></th>
       </tr>
     </thead>
@@ -41,17 +45,31 @@ $result = $stmt->get_result();
           echo '<td>' . $room_details['Title'] . '</td>';
           echo '<td>' . $room_details['Location'] . '</td>';
           echo '<td>' . $room_details['Price'] . '</td>';
-          echo '<td>' . ($room_details['is_verified'] == 1 ? 'Yes' : 'No') . '</td>';
+          // Determine room status
+          $roomStatus = 'Pending';
+          if ($room_details['is_cancelled']) {
+            $roomStatus = '-';
+          }
+          elseif ($room_details['is_approved'] == 1) {
+            $roomStatus = 'Approved';
+          } elseif ($room_details['is_rejected'] == 1) {
+            $roomStatus = 'Rejected';
+          }
+          echo '<td>' . $roomStatus . '</td>';
           // Check if booking is cancelled
           if ($room_details['is_cancelled'] == 1) {
             echo '<td>Cancelled</td>';
           } else {
             // Display cancel button if booking is not cancelled
-            echo '<td> 
-              <button type="button" class="btn btn-default cancel-btn" data-booking-id="' . $room_details['id'] . '">
-                Cancel
-              </button>  
-            </td>';
+            if ($room_details['is_approved'] == 1 || $room_details['is_rejected'] == 1) {
+              echo '<td>-</td>';
+            } else {
+              echo '<td> 
+                <button type="button" class="btn btn-default cancel-btn" data-booking-id="' . $room_details['id'] . '">
+                  Cancel
+                </button>  
+              </td>';
+            }
           }
           echo '</tr>';
         }
