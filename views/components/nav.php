@@ -58,11 +58,13 @@
         </li>
         <?php    
       } else {
-        ?>
+        if(isset($_SESSION["user"]) && !empty($_SESSION['user']) && !boolval($_SESSION["user"]["is_admin"])){
+      ?>
         <li class="nav-item">
           <a class="nav-link" href="/kothaGhar/views/pages/mybookings.php">My Bookings</a>
         </li>
         <?php
+        }
       }
      ?>
     </ul>

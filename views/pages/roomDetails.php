@@ -10,7 +10,11 @@ include ("../../config/config_db.php");
 if (isset($_GET['id'])) {
     $roomId = $_GET['id'];
 
-    $sql = "SELECT * FROM add_room ar LEFT JOIN booked_rooms br ON ar.RoomID = br.room_id WHERE RoomID = $roomId";
+    $sql = "SELECT * FROM add_room ar 
+    LEFT JOIN booked_rooms br ON ar.RoomID = br.room_id 
+    WHERE RoomID = $roomId 
+    ORDER BY br.id DESC
+    LIMIT 1";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -27,9 +31,9 @@ if (isset($_GET['id'])) {
                     <p class="price">Price: Rs.<?php echo $row['Price'] ?></p>
 
                     <?php
-                    // Check if the room is cancelled or not booked
-                    if ($row['is_cancelled'] == true || $row['id'] == null) {
-                        // Display the book button only if the room is cancelled or not booked
+                    // Check if the room is available for booking
+                    // print_r($row['is_cancelled'], $row['is_rejected'], $row['is_approved']);
+                    if ($row['is_cancelled'] == 1 || $row['is_cancelled'] == null || $row['is_rejected'] == 1 || $row['is_rejected'] == null) {
                         ?>
                         <form class="booking-form" method="post" action="roomDetails.php?id=<?php echo $roomId ?>">
                             <button type="submit" name="book_room" class="book-button">BOOK</button>

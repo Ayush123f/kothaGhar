@@ -1,15 +1,18 @@
 <?php
 include ("../../config/config_db.php");
 
-// Function to update verification status in the database
-function updateVerificationStatus($roomId, $isVerified, $conn) {
-    $stmt = $conn->prepare("UPDATE booked_rooms SET is_verified = ? WHERE room_id = ?");
-    $stmt->bind_param("ii", $isVerified, $roomId);
+// Function to update approval status in the database
+function updateApprovalStatus($roomId, $isApproved, $isRejected, $conn) {
+    $stmt = $conn->prepare("UPDATE booked_rooms SET is_approved = ?, is_rejected = ? WHERE room_id = ?");
+    $stmt->bind_param("iii", $isApproved, $isRejected, $roomId);
     $stmt->execute();
     $stmt->close();
 }
 
-$query = "SELECT * FROM booked_rooms br inner join add_room ar on br.room_id = ar.roomID inner join users u on br.user_id = u.user_id";
+$query = "SELECT * FROM booked_rooms br inner join add_room ar 
+on br.room_id = ar.roomID inner join users u 
+on br.user_id = u.user_id
+order by br.id desc";
 $result = $conn->query($query);
 ?>
 
@@ -23,7 +26,7 @@ $result = $conn->query($query);
         <th><span>Email</span></th>
         <th><span>Room Title</span></th>
         <th><span>Cancellation Status</span></th>
-        <th><span>Verification Status</span></th>
+        <th><span>Approval Status</span></th>
       </tr>
     </thead>
     <tbody>
@@ -38,10 +41,18 @@ $result = $conn->query($query);
           echo '<td>' . $room_details['Title'] . '</td>';
           echo '<td>' . ($room_details['is_cancelled'] == 1 ? 'Yes' : 'No') . '</td>';
           echo '<td>';
-          echo '<label class="switch">';
-          echo '<input type="checkbox" class="verification-checkbox" data-room-id="' . $room_details['room_id'] . '" ' . ($room_details['is_verified'] == 1 ? 'checked' : '') . '>';
-          echo '<span class="slider"></span>';
-          echo '</label>';
+          // Check if room is approved or rejected
+          if ($room_details['is_approved'] == 1) {
+            echo 'Approved';
+          } elseif ($room_details['is_rejected'] == 1) {
+            echo 'Rejected';
+          } elseif ($room_details['is_cancelled'] == 1) {
+            echo '-';
+          } else {
+            // If not approved or rejected, display approve and reject buttons
+            echo '<button class="approve-button" data-room-id="' . $room_details['room_id'] . '">Approve</button>';
+            echo '<button class="reject-button" data-room-id="' . $room_details['room_id'] . '">Reject</button>';
+          }
           echo '</td>';
           echo '</tr>';
         }
@@ -59,40 +70,55 @@ $result = $conn->query($query);
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const checkboxes = document.querySelectorAll('.verification-checkbox');
-    checkboxes.forEach(function(checkbox) {
-      checkbox.addEventListener('click', function() {
+    const approveButtons = document.querySelectorAll('.approve-button');
+    const rejectButtons = document.querySelectorAll('.reject-button');
+
+    approveButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
         const roomId = this.getAttribute('data-room-id');
-        const isVerified = this.checked ? 1 : 0;
-        if (!confirm('Are you sure you want to change the verification status?')) {
-          // Revert checkbox state if user cancels
-          this.checked = !this.checked;
+        if (!confirm('Are you sure you want to approve this booking?')) {
           return;
         }
-        // If user confirms, update verification status in the database
-        fetch('update_verification.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            roomId: roomId,
-            isVerified: isVerified
-          }),
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to update verification status');
-          }
-          // Success message or additional actions if needed
-          console.log('Verification status updated successfully');
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          // Revert checkbox state if there's an error
-          this.checked = !this.checked;
-        });
+        // If user confirms, update approval status in the database
+        updateStatus(roomId, true, false);
       });
     });
+
+    rejectButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        const roomId = this.getAttribute('data-room-id');
+        if (!confirm('Are you sure you want to reject this booking?')) {
+          return;
+        }
+        // If user confirms, update rejection status in the database
+        updateStatus(roomId, false, true);
+      });
+    });
+
+    function updateStatus(roomId, isApproved, isRejected) {
+      fetch('update_approval.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          roomId: roomId,
+          isApproved: isApproved,
+          isRejected: isRejected
+        }),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to update approval status');
+        }
+        // Success message or additional actions if needed
+        console.log('Approval status updated successfully');
+        // Reload the page to reflect the changes
+        location.reload();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
   });
 </script>
