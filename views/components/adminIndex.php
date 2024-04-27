@@ -23,7 +23,7 @@ function getTotalCancellations($conn)
 // Function to retrieve total pending bookings
 function getTotalPendingBookings($conn)
 {
-    $query = "SELECT COUNT(*) AS total FROM booked_rooms WHERE is_approved = '0' AND is_rejected = '0'";
+    $query = "SELECT COUNT(*) AS total FROM booked_rooms WHERE is_cancelled='0' and is_approved = '0' AND is_rejected = '0'";
     $result = $conn->query($query);
     $row = $result->fetch_assoc();
     return $row['total'];
