@@ -16,7 +16,7 @@ include ("views/components/nav.php");
     background-image: url("image/house.jpg");
 
     /* Full height */
-    height: 60%;
+    height: 500px;
 
     /* Center and scale the image nicely */
     background-position: bottom;
@@ -71,7 +71,7 @@ include ("views/components/nav.php");
 <div class="search-container-wrapper">
   <form method="GET">
     <div class="search-container active-cyan-4 mb-4 inline">
-      <input class="search-input" type="text" placeholder="Title, Location to search room." name="search"
+      <input class="search-input" type="text" placeholder="Location to search room." name="search"
         aria-label="Search">
       <button type="submit" class="search-button">
         <img src="image/search.svg" height="25px" width="25px" alt="Logo" class="search-logo">

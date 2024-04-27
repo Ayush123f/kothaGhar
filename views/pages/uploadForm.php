@@ -14,7 +14,6 @@ if(isset($_GET['id'])) {
     $roomId = $_GET['id'];
     
     // Fetch room information from the database based on the room ID
-    // Assuming you have fetched room information and stored it in $roomInfo variable
     
     // Pre-fill form fields with room information
     echo "<script>";

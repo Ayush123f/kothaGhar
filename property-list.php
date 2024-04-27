@@ -67,8 +67,8 @@ if ($result->num_rows > 0) {
     <div class="card">
         <img class="image" src="{$room_details['ImagePath']}" alt="Room Image">
         <h4><b>{$room_details['Title']}</b></h4>
-        <p>Number of Rooms: {$room_details['NumberOfRooms']}</p>
-        <p>Price: {$room_details['Price']}</p>
+        <!-- <p>Number of Rooms: {$room_details['NumberOfRooms']}</p>
+        <p>Price: {$room_details['Price']}</p> -->
         <p>Location: {$room_details['Location']}</p>
         <a href="views/pages/roomDetails.php?id={$room_details['RoomID']}"><button type="button">View</button></a>
     </div>

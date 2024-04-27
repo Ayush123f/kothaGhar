@@ -57,7 +57,6 @@ $result = $stmt->get_result();
         }
       } else {
         // If the query didn't return any results, display an error message
-        echo 'Error: No rooms found.';
       }
 
       // Close the database connection

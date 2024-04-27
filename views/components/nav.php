@@ -16,7 +16,9 @@
       <!-- Add button to add room -->
       <button type="button" class="btn btn-default navbar-btn" onclick="location.href='/kothaGhar/views/pages/AddRoom.php';">Add Room</button>
       <a class="navbar-brand" href="/kothaGhar/index.php">
-        <img src="images/logo.png" alt="logo" style="height:50px;">
+      <!-- <span style="font-size: 20px;">KothaGhar</span> -->
+
+        <!-- <img src="image/rent1.jpg" alt="logo" style="height:50px;"> -->
       </a>
     </div>
 
@@ -25,7 +27,9 @@
     <div class="navbar-header">
       <!-- Add button to add room -->
       <a class="navbar-brand" href="/kothaGhar/index.php">
-        <img src="images/logo.png" alt="logo" style="height:50px;">
+      <span style="font-size: 20px;">KothaGhar</span>
+
+        <!-- <img src="images/logo.png" alt="logo" style="height:50px;"> -->
       </a>
     </div>
   
@@ -71,8 +75,8 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> My Profile
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="profile.php">Profile</a></li>
-            <li><a href="booked-property.php">Booked Property</a></li>
+            <li><a href="userProfile.php">Profile</a></li>
+            <li><a href="/KothaGhar/views/pages/mybookings.php">Booked Property</a></li>
             <li><a href="/KothaGhar/views/pages/logout.php">Logout</a></li>
           </ul>
         </li>
@@ -87,7 +91,6 @@
     </ul>
   </div>
 </nav>
-
 
 </body>
 </html>
