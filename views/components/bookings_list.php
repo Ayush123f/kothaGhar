@@ -17,7 +17,7 @@ $result = $conn->query($query);
 ?>
 
 <div id="wrapper">
-  <h1>Record of Rooms</h1>
+  <h1>Booking Records</h1>
   <table id="keywords" cellspacing="0" cellpadding="0">
     <thead>
       <tr>
@@ -56,9 +56,6 @@ $result = $conn->query($query);
           echo '</td>';
           echo '</tr>';
         }
-      } else {
-        // If the query didn't return any results, display an error message
-        echo 'Error: No rooms found.';
       }
 
       // Close the database connection
