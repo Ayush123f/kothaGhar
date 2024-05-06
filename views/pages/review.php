@@ -1,71 +1,32 @@
-<?php 
-
-include ("../../config/config.php");
-
-
-if(isset($_POST['review'])){
-	review();
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  require_once BASE_DIR . "config/config_db.php";
-  require_once BASE_DIR . "config/functions.php";
-
-  $rating = $_POST['rating'];
-  $comment = $_POST['comment'];
-}
-
-function review(){
-	global $db;
-	$room_id=$_GET['room_id'];
-  $comment=$_POST['comment'];
-  $rating=$_POST['rating'];
-  $reviewby=$_SESSION["user"]["email"];
-
-$sql= "INSERT INTO review(comment,rating,reviewby,room_id) VALUES('$comment','$rating','$reviewby','$room_id')";
-$query=mysqli_query($db,$sql);
-if(!empty($query)){
-	?>
-
-<style>
-.alert {
-  padding: 20px;
-  background-color: #DC143C;
-  color: white;
-}
-
-.closebtn {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.closebtn:hover {
-  color: black;
-}
-</style>
-<script>
-	window.setTimeout(function() {
-    $(".alert").fadeTo(1000, 0).slideUp(500, function(){
-        $(this).remove(); 
-    });
-}, 2000);
-</script>
-<div class="container">
-<div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>Your review has been recorded.</strong>
-</div></div>
-
-
 <?php
-}
+session_start();
 
-}
+include("../../config/config_db.php");
 
- ?>
+// Check if the form was submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Retrieve form data and sanitize
+  $user_id = $_SESSION["user"]["id"];
+  $rating = mysqli_real_escape_string($conn, $_POST["rating"]);
+  $comment = mysqli_real_escape_string($conn, $_POST["comment"]);
+  $room_id = mysqli_real_escape_string($conn, $_POST["room_id"]);
+
+  // Update profile data in the database
+  $sql = "INSERT INTO REVIEW (reviewby, rating, comment, room_id) VALUES ('$user_id', '$rating', '$comment', '$room_id')";
+  if (mysqli_query($conn, $sql)) {
+    // Profile updated successfully
+    $_SESSION["success_message"] = "Feedback updated successfully.";
+  } else {
+    // Error updating profile
+    $_SESSION["error_message"] = "Error providing feedback: " . mysqli_error($db);
+  }
+
+  // Redirect back to tenant profile page
+  header("location:/kothaGhar/views/pages/roomDetails.php?id={$room_id}");
+  exit; // Stop further execution
+} else {
+  // If the form was not submitted, redirect to tenant profile page
+  header("location:/kothaGhar/views/pages/roomDetails.php?id={$room_id}");
+  exit; // Stop further execution
+}
+?>

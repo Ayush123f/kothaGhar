@@ -60,7 +60,7 @@ if (isset($_GET['id'])) {
 
                         if ($reviewResult->num_rows > 0) {
                             while ($review = $reviewResult->fetch_assoc()) {
-                                echo "<p><strong>User:</strong> {$review['user_name']}</p>";
+                                echo "<p><strong>User:</strong> {$review['reviewby']}</p>";
                                 echo "<p><strong>Rating:</strong> {$review['rating']}</p>";
                                 echo "<p><strong>Comment:</strong> {$review['comment']}</p>";
                                 echo "<hr>";
@@ -72,7 +72,7 @@ if (isset($_GET['id'])) {
 
                         <!-- Review Form -->
                         <h3>Add Your Review</h3>
-                        <form method="post" action="add_review.php">
+                        <form method="post" action="/kothaGhar/views/pages/review.php">
                             <input type="hidden" name="room_id" value="<?php echo $roomId ?>">
                             <label for="rating">Rating:</label>
                             <input type="number" name="rating" id="rating" min="1" max="5" required>
