@@ -136,22 +136,28 @@ if (isset($_GET['id'])) {
             </div>
             <div class="review-container">
                 <!-- Review Section -->
-                <div class="review-form">
-                    <!-- Review Form -->
-                    <h3>Add Your Review</h3>
-                    <form method="post" action="/kothaGhar/views/pages/review.php">
-                        <input type="hidden" name="room_id" value="<?php echo $roomId ?>">
-                        <div class="form-group">
-                            <label for="rating">Rating:</label>
-                            <input type="number" name="rating" id="rating" min="1" max="5" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="comment">Comment:</label>
-                            <textarea name="comment" id="comment" rows="4" required></textarea>
-                        </div>
-                        <button type="submit">Post</button>
-                    </form>
-                </div>
+                <?php 
+                if (isset($_SESSION['user']) && $_SESSION['user']['is_admin'] == 0) { ?>
+                    <div class="review-form">
+                        <!-- Review Form -->
+                        <h3>Add Your Review</h3>
+                        <form method="post" action="/kothaGhar/views/pages/review.php">
+                            <input type="hidden" name="room_id" value="<?php echo $roomId ?>">
+                            <div class="form-group">
+                                <label for="rating">Rating:</label>
+                                <input type="number" name="rating" id="rating" min="1" max="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">Comment:</label>
+                                <textarea name="comment" id="comment" rows="4" required></textarea>
+                            </div>
+                            <button type="submit">Post</button>
+                        </form>
+                    </div>
+                <?php } else if (!(isset($_SESSION['user']))) { ?>
+                    <p class="error">You need to login to post a review.</p>
+                <?php 
+                } ?>
                 <div class="well well-sm">
                     <!-- Display existing reviews for the room -->
                     <?php
