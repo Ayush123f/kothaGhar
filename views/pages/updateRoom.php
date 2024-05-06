@@ -1,7 +1,7 @@
 <?php
 // Start the session and include the database configuration file
 session_start();
-include("../../config/config_db.php");
+include ("../../config/config_db.php");
 
 // Check if the user is authenticated, otherwise redirect to the login page
 if (!isset($_SESSION['user'])) {
@@ -13,15 +13,24 @@ if (!isset($_SESSION['user'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the form data
     $roomId = $_POST['RoomId'];
-    $title = $_POST['title'];
-    $numberOfRooms = $_POST['numberOfRooms'];
+    $title = $_POST['Title'];
+    $numberOfRooms = $_POST['NumberOfRoom'];
+    $bedroom = $_POST['bedroom'];
+    $livingroom = $_POST['livingroom'];
+    $bathroom = $_POST['bathroom'];
+    $kitchen = $_POST['kitchen'];
     $price = $_POST['price'];
     $location = $_POST['location'];
 
     // Perform validation (optional)
 
     // Update the room details in the database
-    $query = "UPDATE add_room SET Title='$title', NumberOfRooms='$numberOfRooms', Price='$price', Location='$location' WHERE RoomID='$roomId'";
+    $query = "UPDATE add_room 
+    SET Title='$title', NumberOfRooms='$numberOfRooms', 
+    Price='$price', Location='$location', Bedroom='$bedroom', 
+    Livingroom='$livingroom', Bathroom='$bathroom', Kitchen='$kitchen'
+    WHERE RoomID='$roomId'
+    ";
     $result = $conn->query($query);
 
     // Check if the update was successful
