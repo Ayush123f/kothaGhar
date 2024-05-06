@@ -2,14 +2,14 @@
 session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION["email"])) {
+if (!isset($_SESSION["user"])) {
     header("location:/kothaGhar/views/pages/index.php");
     exit; // Stop further execution
 }
 
 // Include the database configuration file
 include("../../config/config_db.php");
-
+?>
 <div class="modal-body">
 <form method="POST" action="updateProfile.php">
   <div class="form-group">
@@ -25,18 +25,18 @@ include("../../config/config_db.php");
     <label for="phone_no">Phone No.:</label>
     <input type="text" class="form-control" id="contact" value="<?php echo $rows['contact']; ?>" name="contact">
   </div>
-
+<?php
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tenant_update"])) {
     // Retrieve form data and sanitize
     $user_id = $_POST["user_id"];
-    $full_name = mysqli_real_escape_string($db, $_POST["full_name"]);
-    $contact = mysqli_real_escape_string($db, $_POST["contact"]);
-    $address = mysqli_real_escape_string($db, $_POST["address"]);
+    $full_name = mysqli_real_escape_string($conn, $_POST["full_name"]);
+    $contact = mysqli_real_escape_string($conn, $_POST["contact"]);
+    // $address = mysqli_real_escape_string($conn, $_POST["address"]);
 
     // Update profile data in the database
-    $sql = "UPDATE users SET full_name='$full_name', contact='$contact', WHERE user_id='$user_id'";
-    if (mysqli_query($db, $sql)) {
+    $sql = "UPDATE users SET full_name='$full_name', contact='$contact' WHERE user_id='$user_id'";
+    if (mysqli_query($conn, $sql)) {
         // Profile updated successfully
         $_SESSION["success_message"] = "Profile updated successfully.";
     } else {
