@@ -44,9 +44,17 @@ if ($result->num_rows > 0) {
         <form class="sign-up-form" action="updateRoom.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="RoomId" value="<?php echo $room_details['RoomID']; ?>">
 
-            <input type="text" id="title" name="title" placeholder="Title" required value="<?php echo $room_details['Title']; ?>">
+            <input type="text" id="Title" name="Title" placeholder="Title" required value="<?php echo $room_details['Title']; ?>">
 
-            <input type="number" id="numOfRooms" name="numOfRoom" placeholder="No. of rooms" required value="<?php echo $room_details['NumberOfRooms']; ?>">
+            <input type="number" id="NumberOfRooms" name="NumberOfRoom" placeholder="NumberofRooms" required value="<?php echo $room_details['NumberOfRooms']; ?>">
+
+            <input type="number" id="bedroom" name="bedroom" placeholder="bedroom" required value="<?php echo $room_details['Bedroom']; ?>">
+
+            <input type="number" id="livingroom" name="livingroom" placeholder="livingroom" required value="<?php echo $room_details['Livingroom']; ?>">
+
+            <input type="number" id="bathroom" name="bathroom" placeholder="bathroom" required value="<?php echo $room_details['Bathroom']; ?>">
+
+            <input type="number" id="kitchen" name="kitchen" placeholder="kitchen" required value="<?php echo $room_details['Kitchen']; ?>">
 
             <input type="number" id="price" name="price" placeholder="Price" required value="<?php echo $room_details['Price']; ?>"><br>
 

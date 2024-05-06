@@ -37,36 +37,37 @@ button:hover, a:hover {
 <center><h3>Tenant Profile</h3></center>
 <div class="container">
   <?php 
-    include(" config/config_db.php");
-    $u_email= $_SESSION["email"];
+    include("../../config/config_db.php");
+    $u_email= $_SESSION["user"]['email'];
 
     $sql="SELECT * from users where email='$u_email'";
-    $result=mysqli_query($db,$sql);
+    $result=mysqli_query($conn,$sql);
 
     if(mysqli_num_rows($result) > 0) {
         while($rows=mysqli_fetch_assoc($result)) {
   ?>
   <div class="card">
-    <img src="images/avatar.png" alt="John" style="height:200px; width: 100%">
+    <!-- <img src="images/avatar.png" alt="John" style="height:200px; width: 100%"> -->
     <h1><?php echo $rows['full_name']; ?></h1>
+
+
+    
     <p class="title"><?php echo $rows['email']; ?></p>
-    <p><b>Phone No.: </b><?php echo $rows['phone_no']; ?></p>
-    <p><b>Address: </b><?php echo $rows['address']; ?></p>
-    <p><b>Id Type: </b><?php echo $rows['id_type']; ?></p>
-    <p><img src="<?php echo $rows['id_photo']; ?>" height="100px"></p>
+    <p><b>contact: </b><?php echo $rows['contact']; ?></p>
+    <!-- <p><img src="<?php echo $rows['id_photo']; ?>" height="100px"></p> -->
 
     <!-- Trigger the modal with a button -->
-    <p><button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal_<?php echo $rows['tenant_id']; ?>">Update Profile</button></p>
+    <!-- <p><button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal_<?php echo $rows['tenant_id']; ?>">Update Profile</button></p> -->
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal_<?php echo $rows['tenant_id']; ?>" role="dialog">
+    <!-- <div class="modal fade" id="myModal_<?php echo $rows['tenant_id']; ?>" role="dialog"> -->
       <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Update Profile</h4>
+          <!-- <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            <!-- <h4 class="modal-title">Update Profile</h4> -->
           </div>
           <div class="modal-body">
             <form method="POST" action="updateProfile.php">
@@ -81,11 +82,11 @@ button:hover, a:hover {
               </div>
               <div class="form-group">
                 <label for="phone_no">Phone No.:</label>
-                <input type="text" class="form-control" id="phone_no" value="<?php echo $rows['phone_no']; ?>" name="phone_no">
+                <input type="text" class="form-control" id="contact" value="<?php echo $rows['contact']; ?>" name="contact">
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="address">Address:</label>
-                <input type="text" class="form-control" id="address" value="<?php echo $rows['address']; ?>" name="address">
+                <!-- <input type="text" class="form-control" id="address" value="<?php echo $rows['address']; ?>" name="address"> -->
               </div>
               <hr>
               <center><button id="submit" name="tenant_update" class="btn btn-primary btn-block">Update</button></center><br>

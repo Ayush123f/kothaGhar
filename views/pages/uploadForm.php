@@ -53,13 +53,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if any files were uploaded successfully
     if (!empty($uploadedFilePaths)) {
         // Prepare and execute SQL insert query using prepared statements
-        $sql = "INSERT INTO add_room (Title, NumberOfRooms, Price, Location, ImagePath) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO add_room (Title, NumberOfRooms,Price, Location, ImagePath,Bedroom,Livingroom,Bathroom,Kitchen) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
         $stmt = mysqli_prepare($conn, $sql);
 
         // Check if the statement was prepared successfully
         if ($stmt) {
             foreach ($uploadedFilePaths as $imagePath) {
-                mysqli_stmt_bind_param($stmt, "ssiss", $title, $numOfRooms, $price, $location, $imagePath);
+                mysqli_stmt_bind_param($stmt, "ssissssss", $title, $numberOfRooms, $price, $location, $imagePath,$bedroom,$livingroom,$bathroom,$kitchen);
                 mysqli_stmt_execute($stmt);
             }
             echo "<script>alert('Request submitted successfully')</script>";
@@ -78,11 +78,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="form">
         <form class="sign-up-form" action="" method="post" enctype="multipart/form-data">
 
-            <input type="text" id="title" name="title" placeholder="Title" required>
+            <input type="text" id="Title" name="Title" placeholder="Title" required>
 
-            <input type="number" id="numOfRooms" name="numOfRoom" placeholder="No. of rooms" required>
+            <input type="number" id="NumberOfRooms" name="NumberOfRoom" placeholder="No. of rooms" required>
 
-            <input type="number" id="price" name="price" placeholder="Price" required>
+            <input type="number" id="Price" name="Price" placeholder="Price" required>
+
+            <input type="number" id="Bedroom" name="Bedroom" placeholder="Bedroom" required>
+
+            <input type="number" id="livingroom" name="livingroom" placeholder="livingroom" required>
+
+            <input type="number" id="Bathroom" name="Bathroom" placeholder="Bathroom" required>
+
+            <input type="number" id="kitchen" name="kitchen" placeholder="kitchen" required>
 
             <input type="text" id="location" name="location" placeholder="Location" required>
 
