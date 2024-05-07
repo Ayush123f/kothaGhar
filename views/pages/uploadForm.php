@@ -30,6 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $price = $_POST["price"];
     $location = $_POST["location"];
     $imageFiles = $_FILES["uploadImage"];
+    $livingroom =$_POST["livingroom"];
+    $bedroom =$_POST["bedroom"];
+    $kitchen =$_POST["kitchen"];
+    $bathroom =$_POST["bathroom"];
 
     // Validate image files size and move them to a directory
     $uploadDirectory = MEDIA_DIR . '/uploadImg/';
@@ -59,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Check if the statement was prepared successfully
         if ($stmt) {
             foreach ($uploadedFilePaths as $imagePath) {
-                mysqli_stmt_bind_param($stmt, "ssissssss", $title, $numberOfRooms, $price, $location, $imagePath,$bedroom,$livingroom,$bathroom,$kitchen);
+                mysqli_stmt_bind_param($stmt, "ssissssss", $title, $numOfRooms, $price, $location, $imagePath,$bedroom,$livingroom,$bathroom,$kitchen);
                 mysqli_stmt_execute($stmt);
             }
             echo "<script>alert('Request submitted successfully')</script>";
@@ -78,17 +82,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="form">
         <form class="sign-up-form" action="" method="post" enctype="multipart/form-data">
 
-            <input type="text" id="Title" name="Title" placeholder="Title" required>
+            <input type="text" id="Title" name="title" placeholder="Title" required>
 
-            <input type="number" id="NumberOfRooms" name="NumberOfRoom" placeholder="No. of rooms" required>
+            <input type="number" id="NumOfRooms" name="numOfRoom" placeholder="No. of rooms" required>
 
-            <input type="number" id="Price" name="Price" placeholder="Price" required>
+            <input type="number" id="Price" name="price" placeholder="Price" required>
 
-            <input type="number" id="Bedroom" name="Bedroom" placeholder="Bedroom" required>
+            <input type="number" id="Bedroom" name="bedroom" placeholder="Bedroom" required>
 
             <input type="number" id="livingroom" name="livingroom" placeholder="livingroom" required>
 
-            <input type="number" id="Bathroom" name="Bathroom" placeholder="Bathroom" required>
+            <input type="number" id="Bathroom" name="bathroom" placeholder="Bathroom" required>
 
             <input type="number" id="kitchen" name="kitchen" placeholder="kitchen" required>
 
