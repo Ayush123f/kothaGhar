@@ -165,14 +165,13 @@ strong {
 }
 
 .room-image img {
-  width: 50%;
-  max-width: 500px;
-  height: auto;
+  width: 600px;
+  height: 400px;
   display: block;
   margin: 0 auto;
 }
 
 .room-details-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
