@@ -77,8 +77,10 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> My Profile
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="userProfile.php">Profile</a></li>
+            <li><a href="/KothaGhar/views/pages/userProfile.php">Profile</a></li>
+            <?php if(isset($_SESSION["user"]) && !empty($_SESSION['user']) && !boolval($_SESSION["user"]["is_admin"])){ ?>
             <li><a href="/KothaGhar/views/pages/mybookings.php">Booked Property</a></li>
+            <?php } ?>
             <li><a href="/KothaGhar/views/pages/logout.php">Logout</a></li>
           </ul>
         </li>

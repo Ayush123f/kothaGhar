@@ -1,107 +1,115 @@
-<?php 
-session_start();
-if(!isset($_SESSION["user"])){
-  header("location:index.php");
-}
- ?>
 <style>
-	.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  margin: auto;
-  text-align: center;
-  font-family: arial;
-}
-button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-}
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    margin-right: auto!important;
+    text-align: center;
+    font-family: arial;
+  }
 
-button:hover, a:hover {
-  opacity: 0.7;
-}
+  button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
 
-.form-group {
-  text-align: left;
-}
+  button:hover,
+  a:hover {
+    opacity: 0.7;
+  }
+
+  .form-group {
+    text-align: left;
+  }
+
+  .form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
 </style>
 
-<center><h3>Tenant Profile</h3></center>
-<div class="container">
-  <?php 
-    include("../../config/config_db.php");
-    $u_email= $_SESSION["user"]['email'];
+<?php
+const BASE_DIR = __DIR__ . '/../../';
 
-    $sql="SELECT * from users where email='$u_email'";
-    $result=mysqli_query($conn,$sql);
+require_once BASE_DIR . 'views/components/head.php';
+require_once BASE_DIR . 'views/components/nav.php';
 
-    if(mysqli_num_rows($result) > 0) {
-        while($rows=mysqli_fetch_assoc($result)) {
-  ?>
-  <div class="card">
-    <!-- <img src="images/avatar.png" alt="John" style="height:200px; width: 100%"> -->
-    <h1><?php echo $rows['full_name']; ?></h1>
+include ("../../config/config_db.php");
 
+$u_email = $_SESSION["user"]['email'];
 
-    
-    <p class="title"><?php echo $rows['email']; ?></p>
-    <p><b>contact: </b><?php echo $rows['contact']; ?></p>
-    <!-- <p><img src="<?php echo $rows['id_photo']; ?>" height="100px"></p> -->
+$sql = "SELECT * from users where email='$u_email'";
+$result = mysqli_query($conn, $sql);
+?>
 
-    <!-- Trigger the modal with a button -->
-    <!-- <p><button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal_<?php echo $rows['tenant_id']; ?>">Update Profile</button></p> -->
-
-    <!-- Modal -->
-    <!-- <div class="modal fade" id="myModal_<?php echo $rows['tenant_id']; ?>" role="dialog"> -->
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <!-- <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-            <!-- <h4 class="modal-title">Update Profile</h4> -->
-          </div>
-          <div class="modal-body">
-            <form method="POST" action="updateProfile.php">
-              <div class="form-group">
-                <label for="full_name">Full Name:</label>
-                <input type="hidden" value="<?php echo $rows['user_id']; ?>" name="user_id">
-                <input type="text" class="form-control" id="full_name" value="<?php echo $rows['full_name']; ?>" name="full_name">
-              </div>
-              <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" value="<?php echo $rows['email']; ?>" name="email" readonly>
-              </div>
-              <div class="form-group">
-                <label for="phone_no">Phone No.:</label>
-                <input type="text" class="form-control" id="contact" value="<?php echo $rows['contact']; ?>" name="contact">
-              </div>
-              <!-- <div class="form-group">
-                <label for="address">Address:</label>
-                <!-- <input type="text" class="form-control" id="address" value="<?php echo $rows['address']; ?>" name="address"> -->
-              </div>
-              <hr>
-              <center><button id="submit" name="tenant_update" class="btn btn-primary btn-block">Update</button></center><br>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-
+<div class="room-details-container">
+  <?php
+  if (mysqli_num_rows($result) > 0) {
+    while ($rows = mysqli_fetch_assoc($result)) {
+      ?>
+      <div class="card">
+        <h3><?php echo $rows['email']; ?></h1>
+          <p class="title"><?php echo $rows['full_name']; ?></p>
+          <p><b>Contact: </b><span id="contact"><?php echo $rows['contact']; ?></span></p>
+          <!-- Button to toggle edit mode -->
+          <button type="button" class="btn btn-lg btn-info" id="editButton">Edit</button>
+          <!-- Form for updating profile (initially hidden) -->
+          <form method="POST" action="updateProfile.php" id="updateForm" style="display: none;">
+            <div class="form-group">
+              <label for="full_name">Full Name:</label>
+              <input type="hidden" value="<?php echo $rows['user_id']; ?>" name="user_id">
+              <input type="text" class="form-control" id="full_name" value="<?php echo $rows['full_name']; ?>"
+                name="full_name">
+            </div>
+            <div class="form-group">
+              <label for="phone_no">Phone No.:</label>
+              <input type="text" class="form-control" id="contactInput" value="<?php echo $rows['contact']; ?>"
+                name="contact">
+            </div>
+            <div class="form-buttons">
+            <button type="submit" name="tenant_update" class="btn btn-primary">Update</button>
+            <button type="button" class="btn btn-danger" id="cancelButton">Cancel</button>
+            </div>
+          </form>
       </div>
-    </div>
-  </div>
-  <?php 
-      }
-    } 
+      <?php
+    }
+  }
   ?>
 </div>
+
+<?php
+$conn->close();
+
+require_once BASE_DIR . 'views/components/footer.php';
+?>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // Click event for edit button
+    $("#editButton").click(function () {
+      // Hide paragraphs and show form
+      $("p").hide();
+      $("#editButton").hide();
+      $("#updateForm").show();
+    });
+
+    // Click event for cancel button
+    $("#cancelButton").click(function () {
+      // Show paragraphs and hide form
+      $("p").show();
+      $("#updateForm").hide();
+      $("#editButton").show();
+    });
+  });
+</script>

@@ -25,6 +25,7 @@ if (session_status() == PHP_SESSION_NONE) {
         'updateRoom.php'=> ['loginAndSignup.css'],
         'bookings_list.php'=> ['adminStyle.css'],
         'mybookings.php'=> ['adminStyle.css'],
+        'userProfile.php'=> ['adminStyle.css'],
     ];
 
     $scripts = [
