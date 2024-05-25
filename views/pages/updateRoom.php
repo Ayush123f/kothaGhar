@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $kitchen = $_POST['kitchen'];
     $price = $_POST['price'];
     $location = $_POST['location'];
+    $is_booked =$_POST['is_booked'];
 
     // Perform validation (optional)
 
@@ -28,7 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $query = "UPDATE add_room 
     SET Title='$title', NumberOfRooms='$numberOfRooms', 
     Price='$price', Location='$location', Bedroom='$bedroom', 
-    Livingroom='$livingroom', Bathroom='$bathroom', Kitchen='$kitchen'
+    Livingroom='$livingroom', Bathroom='$bathroom', Kitchen='$kitchen',
+    is_booked='$is_booked'
     WHERE RoomID='$roomId'
     ";
     $result = $conn->query($query);

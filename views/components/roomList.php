@@ -15,6 +15,7 @@ $result = $conn->query($query);
         <th><span>No.of rooms</span></th>
         <th><span>Price</span></th>
         <th><span>Location</span></th>
+        <th><span>Booking_Status</span></th>
         <th><span>Edit</span></th>
         <th><span>Delete</span></th>
       </tr>
@@ -30,6 +31,8 @@ $result = $conn->query($query);
                   <td> {$room_details['NumberOfRooms']} </td>
                   <td> {$room_details['Price']} </td>
                   <td> {$room_details['Location']} </td>
+                  <td> {$room_details['is_booked']} </td>
+
                 
                   <!-- Edit button -->
                   <td><a id="location" href="editRoom.php?id={$room_details['RoomID']}">Edit</a></td>

@@ -9,7 +9,6 @@ require_once BASE_DIR . 'views/components/nav.php';
 require_once BASE_DIR . "config/config_db.php";
 require_once BASE_DIR . "config/functions.php";
 
-
 // Check if the user is not authenticated, redirect to login
 if (!isset($_SESSION['user'])) {
     header("Location: /kothaGhar/views/pages/Login.php");
@@ -42,7 +41,7 @@ if ($result->num_rows > 0) {
     <div class="form">
         <h1>Edit Room </h1>
         <form class="sign-up-form" action="updateRoom.php" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="RoomId" value="<?php echo $room_details['RoomID']; ?>">
+            <input type="hidden" name="RoomId" value="<?php echo $room_details['RoomID']; ?>">
 
             <input type="text" id="Title" name="Title" placeholder="Title" required value="<?php echo $room_details['Title']; ?>">
 
@@ -60,9 +59,27 @@ if ($result->num_rows > 0) {
 
             <input type="text" id="location" name="location" placeholder="Location" required value="<?php echo $room_details['Location']; ?>"><br>
 
+            <input type="checkbox" id="is_booked" name="is_booked" placeholder="is_booked" <?php echo $room_details['is_booked'] ? 'checked' : ''; ?>><br>
 
             <button type="submit">Submit</button>
         </form>
     </div>
 </div>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var isBookedCheckbox = document.getElementById('is_booked');
+
+    // Set the initial value based on whether the checkbox is checked or not
+    isBookedCheckbox.value = isBookedCheckbox.checked ? '0' : '1';
+
+    // Add event listener to update the value when the checkbox state changes
+    isBookedCheckbox.addEventListener('change', function() {
+        this.value = this.checked ? '0' : '1';
+    });
+});
+</script>
+
+<?php
+require_once BASE_DIR . 'views/components/footer.php';
+?>

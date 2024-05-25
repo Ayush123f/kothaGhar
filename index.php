@@ -71,7 +71,7 @@ include ("views/components/nav.php");
 <div class="search-container-wrapper">
   <form method="GET">
     <div class="search-container active-cyan-4 mb-4 inline">
-      <input class="search-input" type="text" placeholder="Location to search room." name="search"
+      <input class="search-input" type="text" placeholder="Enter Location to search room." name="search"
         aria-label="Search">
       <button type="submit" class="search-button">
         <img src="image/search.svg" height="25px" width="25px" alt="Logo" class="search-logo">

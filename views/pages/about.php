@@ -8,11 +8,11 @@ require_once BASE_DIR . 'views/components/nav.php';
 
 <div class="container">
           <div class="div-left">
-            <img src="../../images/house.jpg" alt="Google Home">
+            <img src="../../image/home.jpg" alt="Google Home">
           </div>
           <div class="div-right">
-            <h4>Kothaghar</h4>
-            <p>Kothaghar is Nepal's premier online real estate platform for renting both residential
+          <h4>Kothaghar</h4>
+          <p>Kothaghar is Nepal's premier online real estate platform for renting both residential
             and commercial properties. It serves as the top choice for individuals seeking properties in Nepal,
             bridging the gap between users and property owners effortlessly. Kothaghar Rental is dedicated to
             providing comprehensive property information, ensuring that potential customers can find their ideal
@@ -26,8 +26,8 @@ require_once BASE_DIR . 'views/components/nav.php';
             for belongings by allowing users to find their desired vehicle at their location with ease, ensuring 
             a smooth and hassle-free moving experience.
                   
-                  </p>
-            <a class="btn btn-light btn-lg showcase-btn">Read More</a>
+          </p>
+          <a class="btn btn-light btn-lg showcase-btn">Read More</a>
           </div>
         </div>
 
