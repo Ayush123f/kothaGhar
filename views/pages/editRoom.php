@@ -71,11 +71,11 @@ document.addEventListener("DOMContentLoaded", function() {
     var isBookedCheckbox = document.getElementById('is_booked');
 
     // Set the initial value based on whether the checkbox is checked or not
-    isBookedCheckbox.value = isBookedCheckbox.checked ? '0' : '1';
+    isBookedCheckbox.value = isBookedCheckbox.checked ? '1' : '0';
 
     // Add event listener to update the value when the checkbox state changes
     isBookedCheckbox.addEventListener('change', function() {
-        this.value = this.checked ? '0' : '1';
+        this.value = this.checked ? '1' : '0';
     });
 });
 </script>
