@@ -122,7 +122,7 @@ if (isset($_GET['id'])) {
 
                     <!-- Check room availability for booking -->
                     <?php
-                    if ($row['is_cancelled'] == 1 || $row['is_cancelled'] == null || $row['is_rejected'] == 1 || $row['is_rejected'] == null) {
+                    if ($row['is_cancelled'] == 1 || $row['is_cancelled'] == null || $row['is_rejected'] == 1 || $row['is_rejected'] == null || $row['is_completed'] == 1) {
                         ?>
                         <form class="booking-form" method="post" action="roomDetails.php?id=<?php echo $roomId ?>">
                             <button type="submit" name="book_room" class="book-button">BOOK</button>
