@@ -1,7 +1,5 @@
 @import url('components/nav.css');
 
-*{ padding:0; margin:0; box-sizing: border-box;}
-
 
 .container {
   display: flex;
@@ -24,9 +22,9 @@
   width: 50%;
   height: 100%;
 }
-.div-left > img {
+.div-left img {
   height: 5px;
-  width: 5px;
+  max-width: 100%;
 	object-fit: cover;
 	overflow: hidden;
 	border-radius: 0.75rem;

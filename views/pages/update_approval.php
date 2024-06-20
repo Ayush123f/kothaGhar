@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check if all required fields are present
     if (isset($data->roomId) && (isset($data->isApproved) || isset($data->isRejected) || isset($data->isCompleted))){
         // Sanitize and validate the input
-        $roomId = intval($data->roomId);
+        $booking_id = intval($data->roomId);
         $isApproved = intval($data->isApproved);
         $isRejected = intval($data->isRejected);
         $isCompleted = intval($data->isCompleted);
@@ -20,20 +20,45 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if($isCompleted == 1 || $isRejected == 1) {
             // Update the completion status in the database
-            $stmt = $conn->prepare("UPDATE booked_rooms SET is_completed = ? WHERE id = ?");
-            $stmt->bind_param("ii", $isCompleted, $roomId);
-        } else if ($isApproved || $isRejected) {
+            $stmt = $conn->prepare("UPDATE booked_rooms SET is_completed = 1 WHERE id = ?");
+            $stmt->bind_param("i",$booking_id);
+            $stmt->execute();
+            $stmt->close();
+        }
+        if ($isApproved || $isRejected) {
             // Update the approval status in the database
             $stmt = $conn->prepare("UPDATE booked_rooms SET is_approved = ?, is_rejected = ? WHERE id = ?");
-            $stmt->bind_param("iii", $isApproved, $isRejected, $roomId);
+            $stmt->bind_param("iii", $isApproved, $isRejected, $booking_id);
+            $stmt->execute();
+            $stmt->close();
+    
         }
+    
+        // Select the room_id from the booked_rooms table
+        $stmt = $conn->prepare("SELECT room_id FROM booked_rooms WHERE id = ?");
+        $stmt->bind_param("i", $roomId);
         $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $roomId = $row['room_id'];
         $stmt->close();
+
+
 
 
         if($isCompleted == 1 || $isRejected == 1) {
             $stmt = $conn->prepare("UPDATE add_room SET is_booked = 0 WHERE room_id = ?");
             $stmt->bind_param("i", $roomId);
+            $stmt->execute();
+            $stmt->close();
+    
+        }
+        if($isApproved == 1 ) {
+            $stmt = $conn->prepare("UPDATE add_room SET is_booked = 1 WHERE room_id = ?");
+            $stmt->bind_param("i", $roomId);
+            $stmt->execute();
+            $stmt->close();
+    
         }
 
 

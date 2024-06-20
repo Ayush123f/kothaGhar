@@ -59,7 +59,6 @@ if ($result->num_rows > 0) {
 
             <input type="text" id="location" name="location" placeholder="Location" required value="<?php echo $room_details['Location']; ?>"><br>
 
-            <input type="checkbox" id="is_booked" name="is_booked" placeholder="is_booked" <?php echo $room_details['is_booked'] ? 'checked' : ''; ?>><br>
 
             <button type="submit">Submit</button>
         </form>

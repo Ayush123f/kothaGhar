@@ -8,7 +8,7 @@ require_once BASE_DIR . 'views/components/nav.php';
 
 <div class="container">
           <div class="div-left">
-            <img src="../../image/home.jpg" alt="Google Home">
+            <img src="../../image/home.jpg" alt="Google Home" width = "100%">
           </div>
           <div class="div-right">
           <h4>Kothaghar</h4>

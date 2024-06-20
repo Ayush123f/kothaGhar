@@ -91,7 +91,7 @@ $result = $conn->query($query);
         // If user confirms, update approval status in the database
         updateStatus(roomId, true, false);
       });
-    });
+    }); 
 
     rejectButtons.forEach(function(button) {
       button.addEventListener('click', function() {
